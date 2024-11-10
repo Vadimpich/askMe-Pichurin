@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавить вопрос{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="my-4">Задать новый вопрос</h2>
+
+        <form method="POST" action="#">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Заголовок вопроса</label>
+                <input type="text" class="form-control" id="title" name="title" required placeholder="Введите заголовок вашего вопроса">
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Описание вопроса</label>
+                <textarea class="form-control" id="description" name="description" rows="4" required placeholder="Подробно опишите ваш вопрос"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="tags" class="form-label">Теги</label>
+                <input type="text" class="form-control" id="tags" name="tags" placeholder="Введите теги, разделённые запятой (например, python, оптимизация)">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Опубликовать вопрос</button>
+        </form>
+    </div>
+{% endblock %}

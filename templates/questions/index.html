@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Новые вопросы{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between mb-3">
+        <h2>Новые вопросы</h2>
+        <a href="#" class="text-decoration-none">Популярные вопросы</a>
+    </div>
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-2 d-flex flex-column align-items-center mt-4">
+                <img src="https://via.placeholder.com/80" alt="Аватарка"
+                     class="rounded-circle mb-2">
+
+                <button class="btn btn-outline-success btn-sm mt-2">
+                    <i class="bi bi-heart"></i> 123
+                </button>
+            </div>
+            <div class="col-10">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'question' 1 %}">Как
+                        улучшить
+                        производительность на Python?</a></h5>
+                    <p class="card-text">Какие подходы и библиотеки
+                        использовать для оптимизации работы с большими данными
+                        в Python?</p>
+                    <button class="btn btn-outline-primary btn-sm">Ответы (2)
+                    </button>
+                    <div class="mt-2">
+                        <span class="badge bg-secondary">Python</span>
+                        <span class="badge bg-secondary">Оптимизация</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-2 d-flex flex-column align-items-center mt-4">
+                <img src="https://via.placeholder.com/80" alt="Аватарка"
+                     class="rounded-circle mb-2">
+                <button class="btn btn-outline-success btn-sm mt-2">
+                    <i class="bi bi-heart"></i> 89
+                </button>
+            </div>
+            <div class="col-10">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="#">Как выбрать лучший
+                        фреймворк для веб-разработки?</a></h5>
+                    <p class="card-text">Какие фреймворки для фронтенда и
+                        бэкенда стоит изучать в 2024 году?</p>
+                    <button class="btn btn-outline-primary btn-sm">Ответы (2)
+                    </button>
+                    <div class="mt-2">
+                        <span class="badge bg-secondary">React</span>
+                        <span class="badge bg-secondary">Web</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-2 d-flex flex-column align-items-center mt-4">
+                <img src="https://via.placeholder.com/80" alt="Аватарка"
+                     class="rounded-circle mb-2">
+                <button class="btn btn-outline-success btn-sm mt-2">
+                    <i class="bi bi-heart"></i> 76
+                </button>
+            </div>
+            <div class="col-10">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="#">Что такое глубокое
+                        обучение?</a></h5>
+                    <p class="card-text">Объясните, что такое deep learning, и
+                        как его применяют в реальных проектах.</p>
+                    <button class="btn btn-outline-primary btn-sm">Ответы (2)
+                    </button>
+                    <div class="mt-2">
+                        <span class="badge bg-secondary">AI</span>
+                        <span class="badge bg-secondary">Deep Learning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="#">«</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">»</a></li>
+        </ul>
+    </nav>
+{% endblock %}

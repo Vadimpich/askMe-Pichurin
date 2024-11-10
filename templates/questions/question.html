@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}Как улучшить производительность на Python?{% endblock %}
+
+{% block content %}
+    <div class="mb-4">
+        <h2>Как улучшить производительность на Python?</h2>
+        <p>Какие подходы и библиотеки использовать для оптимизации работы с
+            большими данными в Python? Мне нужно повысить скорость обработки
+            данных в рамках научных вычислений. Поделитесь опытом!</p>
+
+        <div class="d-flex align-items-center">
+            <button class="btn btn-outline-success btn-sm">
+                <i class="bi bi-heart"></i> 123
+            </button>
+        </div>
+
+        <div class="mt-3">
+            <span class="badge bg-secondary">Python</span>
+            <span class="badge bg-secondary">Оптимизация</span>
+            <span class="badge bg-secondary">Библиотеки</span>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <h4>Ответы</h4>
+
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-2 d-flex flex-column align-items-center mt-4">
+                    <img src="https://via.placeholder.com/80" alt="Аватарка"
+                         class="rounded-circle mb-2" width="80">
+                    <span>Ivan</span>
+                </div>
+                <div class="col-10">
+                    <div class="card-body">
+                        <p class="card-text">Для оптимизации работы с большими
+                            данными в Python можно использовать библиотеку
+                            NumPy, которая позволяет значительно ускорить
+                            вычисления за счет работы с многомерными
+                            массивами.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-success btn-sm">
+                                <i class="bi bi-heart"></i> 5
+                            </button>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox"
+                                       value="" id="correct_answer"
+                                       name="correct_answer">
+                                <label class="form-check-label"
+                                       for="correct_answer">
+                                    Правильный ответ
+                                </label>
+                            </div>
+                            <span class="text-muted">1 час назад</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-2 d-flex flex-column align-items-center mt-4">
+                    <img src="https://via.placeholder.com/80" alt="Аватарка"
+                         class="rounded-circle mb-2" width="80">
+                    <span>Maria</span>
+                </div>
+                <div class="col-10">
+                    <div class="card-body">
+                        <p class="card-text">Использование многозадачности и
+                            асинхронных задач также может помочь ускорить
+                            процесс работы с большими объемами данных. Попробуй
+                            использовать `asyncio` для параллельных
+                            вычислений.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-success btn-sm">
+                                <i class="bi bi-heart"></i> 2
+                            </button>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox"
+                                       value="" id="correct_answer"
+                                       name="correct_answer">
+                                <label class="form-check-label"
+                                       for="correct_answer">
+                                    Правильный ответ
+                                </label>
+                            </div>
+                            <span class="text-muted">2 часа назад</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="#">«</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">»</a></li>
+        </ul>
+    </nav>
+
+    <div class="mb-4">
+        <h4>Добавить ответ</h4>
+        <form>
+            <div class="mb-3">
+                <textarea class="form-control" rows="4"
+                          placeholder="Ваш ответ..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить ответ
+            </button>
+        </form>
+    </div>
+{% endblock %}
