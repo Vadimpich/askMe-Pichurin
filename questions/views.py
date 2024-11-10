@@ -9,6 +9,9 @@ def question(request, pk):
 def tag(request, tag):
     return render(request, 'questions/tag.html')
 
+def hot(request):
+    return render(request, 'questions/hot.html')
+
 def ask(request):
     return render(request, 'questions/ask.html')
 
