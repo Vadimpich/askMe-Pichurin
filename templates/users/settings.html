@@ -10,18 +10,13 @@
             {% csrf_token %}
             
             <div class="mb-3">
-                <label for="username" class="form-label">Никнейм</label>
-                <input type="text" class="form-control" id="username" name="username" value="Текущий никнейм" required placeholder="Введите новый никнейм">
+                <label for="username" class="form-label">Имя пользователя</label>
+                <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required placeholder="Введите новый никнейм">
             </div>
             
             <div class="mb-3">
                 <label for="email" class="form-label">Электронная почта</label>
-                <input type="email" class="form-control" id="email" name="email" value="user@example.com" required placeholder="Введите новый email">
-            </div>
-            
-            <div class="mb-3">
-                <label for="new_login" class="form-label">Новый логин</label>
-                <input type="text" class="form-control" id="new_login" name="new_login" value="current_login" placeholder="Введите новый логин">
+                <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required placeholder="Введите новый email">
             </div>
             
             <div class="mb-3">
@@ -31,8 +26,7 @@
                     <img src="https://via.placeholder.com/100" alt="Avatar" class="img-thumbnail" width="100">
                 </div>
             </div>
-
-            <!-- Кнопка обновления -->
+            
             <button type="submit" class="btn btn-primary">Сохранить изменения</button>
         </form>
 

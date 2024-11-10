@@ -11,28 +11,7 @@
 
 </head>
 <body>
-<header class="bg-light py-3">
-    <div class="container d-flex justify-content-between align-items-center">
-        <a class="text-decoration-none text-dark" href="{% url 'index' %}">
-            <h1 class="m-0">AskMe</h1>
-        </a>
-
-        <div class="d-flex align-items-center">
-            <input type="text" class="form-control me-2"
-                   placeholder="Поиск...">
-            <button class="btn btn-primary">Поиск</button>
-        </div>
-        <div class="d-flex align-items-center">
-            <img src="https://via.placeholder.com/40" alt="Аватарка"
-                 class="rounded-circle me-2">
-            <span class="me-2">Никнейм</span>
-            <a href="{% url 'settings' %}">
-                <button class="btn btn-link">Настройки</button>
-            </a>
-            <button class="btn btn-danger ms-2">Выйти</button>
-        </div>
-    </div>
-</header>
+{% include 'includes/header.html' %}
 
 <div class="container py-4">
     <div class="row">
@@ -40,25 +19,22 @@
             {% block content %}
             {% endblock %}
         </div>
-
+    
         <div class="col-md-4">
             <div class="mb-4">
                 <h4>Популярные теги</h4>
                 <ul class="list-unstyled">
                     <li><a href="{% url 'tag' 'python' %}"><span class="badge bg-info">Python</span></a></li>
-                    <li><span class="badge bg-info">React</span></li>
-                    <li><span class="badge bg-info">JavaScript</span></li>
-                    <li><span class="badge bg-info">AI</span></li>
+                    <li><a href="{% url 'tag' 'javascript' %}"><span class="badge bg-info">JavaScript</span></a></li>
                 </ul>
             </div>
 
             <div>
                 <h4>Лучшие пользователи</h4>
                 <ul class="list-unstyled">
-                    <li>Ivan</li>
-                    <li>Alex</li>
-                    <li>Maria</li>
-                    <li>John</li>
+                    <li>ProUser</li>
+                    <li>TestUser</li>
+                    <li>NoviceUser</li>
                 </ul>
             </div>
         </div>
