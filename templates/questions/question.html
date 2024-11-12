@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{ question.title }}{% endblock %}
 
@@ -9,7 +10,7 @@
 
         <div class="d-flex align-items-center">
             <button class="btn btn-outline-success btn-sm">
-                <i class="bi bi-heart"></i> 123
+                <i class="bi bi-heart"></i> {{ question.likes_count }}
             </button>
         </div>
 

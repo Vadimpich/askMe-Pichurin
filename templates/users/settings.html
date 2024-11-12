@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Настройки пользователя{% endblock %}
 
@@ -11,19 +12,19 @@
             
             <div class="mb-3">
                 <label for="username" class="form-label">Имя пользователя</label>
-                <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required placeholder="Введите новый никнейм">
+                <input type="text" class="form-control" id="username" name="username" value="" required placeholder="Введите новый никнейм">
             </div>
             
             <div class="mb-3">
                 <label for="email" class="form-label">Электронная почта</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required placeholder="Введите новый email">
+                <input type="email" class="form-control" id="email" name="email" value="" required placeholder="Введите новый email">
             </div>
             
             <div class="mb-3">
                 <label for="avatar" class="form-label">Изменить аватарку</label>
                 <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*">
                 <div class="mt-2">
-                    <img src="https://via.placeholder.com/100" alt="Avatar" class="img-thumbnail" width="100">
+                    <img src="{% static 'img/80x80.png' %}" alt="Avatar" class="img-thumbnail" width="100">
                 </div>
             </div>
             

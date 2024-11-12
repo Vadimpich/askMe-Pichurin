@@ -1,29 +1,33 @@
+from django.db.models import Count
 from django.shortcuts import render
 
+from questions.models import Question, Answer, Tag
 from questions.utils import paginate
 
-QUESTIONS = [{
-    'id': i,
-    'title': f'Вопрос №{i}',
-    'text': f'Текст вопроса №{i}',
-    'tag': 'Python' if (i % 2 == 0) else 'JavaScript',
-} for i in range(1, 31)]
+# QUESTIONS = [{
+#     'id': i,
+#     'title': f'Вопрос №{i}',
+#     'text': f'Текст вопроса №{i}',
+#     'tag': 'Python' if (i % 2 == 0) else 'JavaScript',
+# } for i in range(1, 31)]
+#
+# ANSWERS = [{
+#     'id': i,
+#     'question_id': i % 30 + 1,
+#     'text': f'Ответ {i} на вопрос {i % 30 + 1}\n'
+#             f'Попробуйте перезагрузить компьютер'
+# } for i in range(1, 151)]
+#
+# USER = {
+#     'id': 1,
+#     'username': 'TestUser',
+#     'email': 'test@email.com'
+# }
 
-ANSWERS = [{
-    'id': i,
-    'question_id': i % 30 + 1,
-    'text': f'Ответ {i} на вопрос {i % 30 + 1}\n'
-            f'Попробуйте перезагрузить компьютер'
-} for i in range(1, 151)]
 
-USER = {
-    'id': 1,
-    'username': 'TestUser',
-    'email': 'test@email.com'
-}
-
-def index(request):
-    page_obj = paginate(request, QUESTIONS, 10)
+def index_view(request):
+    questions = Question.objects.new_questions().add_likes()
+    page_obj = paginate(request, questions, 10)
     return render(
         request,
         'questions/index.html',
@@ -31,42 +35,47 @@ def index(request):
     )
 
 
-def question(request, pk):
+def question_detail_view(request, pk):
+    answers = Answer.objects.filter(question_id=pk)
+    cur_question = Question.objects.annotate(likes_count=Count('likes')).get(pk=pk)
     page_obj = paginate(
         request,
-        [ans for ans in ANSWERS if ans['question_id'] == pk],
-        3
+        answers,
+        5
     )
     return render(
         request,
         'questions/question.html',
         {
-            'question': QUESTIONS[pk - 1],
+            'question': cur_question,
             'page_obj': page_obj
         }
     )
 
 
-def tag(request, tag):
+def tag_view(request, tag_name):
+    tag = Tag.objects.get(name=tag_name)
+    questions = Question.objects.fileter(tag=tag).add_likes()
     page_obj = paginate(
         request,
-        [q for q in QUESTIONS if q['tag'].lower() == tag.lower()],
+        questions,
         10
     )
     return render(
         request,
         'questions/tag.html',
         {
-            'tag': tag,
+            'tag': tag_name,
             'page_obj': page_obj,
         }
     )
 
 
-def hot(request):
+def hot_view(request):
+    questions = Question.objects.hot_questions().add_likes()
     page_obj = paginate(
         request,
-        list(reversed(QUESTIONS[:10])),
+        questions,
         10
     )
     return render(
@@ -91,6 +100,5 @@ def signup(request):
 def settigns(request):
     return render(
         request,
-        'users/settings.html',
-        {'user': USER}
+        'users/settings.html'
     )
