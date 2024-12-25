@@ -17,7 +17,7 @@ class Tag(models.Model):
 
 class QuestionQuerySet(models.QuerySet):
     def add_likes(self):
-        return self.annotate(likes_count=Count('likes'))
+        return self.annotate(likes_count=Count('question_likes'))
 
 
 class QuestionManager(models.Manager):
@@ -73,7 +73,7 @@ class Answer(models.Model):
 
 
 class QuestionLike(models.Model):
-    question = models.ForeignKey(Question, related_name='likes',
+    question = models.ForeignKey(Question, related_name='question_likes',
                                  on_delete=models.CASCADE,
                                  verbose_name='Вопрос')
     user = models.ForeignKey(User, on_delete=models.CASCADE,
@@ -86,7 +86,7 @@ class QuestionLike(models.Model):
 
 
 class AnswerLike(models.Model):
-    answer = models.ForeignKey(Answer, related_name='likes',
+    answer = models.ForeignKey(Answer, related_name='answer_likes',
                                on_delete=models.CASCADE, verbose_name='Ответ')
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              verbose_name='Пользователь')

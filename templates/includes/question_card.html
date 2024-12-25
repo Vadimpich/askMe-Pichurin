@@ -23,8 +23,12 @@
                 <button class="btn btn-outline-primary btn-sm">Ответы (2)
                 </button>
                 <div class="mt-2">
-                    Теги: <span
-                        class="badge bg-secondary">{{ question.tag }}</span>
+                    Теги:
+                    {% for tag in question.tags.all %}
+                        <a class="text-decoration-none" href="{% url 'tag' tag.name %}">
+                            <span class="badge bg-secondary">{{ tag.name }}</span>
+                        </a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
