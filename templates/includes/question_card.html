@@ -5,8 +5,13 @@
             <img src="{% static 'img/80x80.png' %}" alt="Аватарка"
                  class="rounded-circle mb-2">
 
-            <button class="btn btn-outline-success btn-sm mt-2 mb-2">
-                <i class="bi bi-heart"></i> {{ question.likes_count }}
+            <button id="like-button-{{ question.id }}"
+                    class="btn btn-outline-success btn-sm mt-2 mb-2"
+                    data-question-id="{{ question.id }}">
+                <i class="bi bi-heart"></i>
+                <span class="likes-count" id="likes-{{ question.id }}">
+                    {{ question.likes_count }}
+                </span>
             </button>
         </div>
         <div class="col-10">
@@ -14,7 +19,6 @@
                 <a class="he" href="{% url 'question' question.id %}">
                     <h5 class="card-title">
                         {{ question.title }}
-
                     </h5>
                 </a>
                 <p class="card-text">
@@ -22,13 +26,14 @@
                 </p>
                 <a href="{% url 'question' question.id %}">
                     <button class="btn btn-outline-primary btn-sm">
-                        Ответы ({{ question.answers_count }})
+                        Ответы
                     </button>
                 </a>
                 <div class="mt-2">
                     Теги:
                     {% for tag in question.tags.all %}
-                        <a class="text-decoration-none" href="{% url 'tag' tag.name %}">
+                        <a class="text-decoration-none"
+                           href="{% url 'tag' tag.name %}">
                             <span class="badge bg-secondary">{{ tag.name }}</span>
                         </a>
                     {% endfor %}
@@ -37,3 +42,34 @@
         </div>
     </div>
 </div>
+{% if user.is_authenticated %}
+    <script>
+        $(document).ready(function () {
+            $('#like-button-{{ question.id }}').click(function () {
+                const questionId = $(this).data('question-id');
+                console.log(questionId)
+                $.ajax({
+                    url: "{% url 'like_question' %}",
+                    type: 'POST',
+                    data: {
+                        'csrfmiddlewaretoken': '{{ csrf_token }}',
+                        'question_id': questionId,
+                    },
+                    success: function (data) {
+                        $('#likes-{{ question.id }}').text(data.likes_count);
+                        if (data.likes_count !== undefined) {
+                            if ($(this).hasClass('liked')) {
+                                $(this).removeClass('liked');
+                            } else {
+                                $(this).addClass('liked');
+                            }
+                        }
+                    },
+                    error: function (data) {
+                        alert(data.responseJSON.error);
+                    }
+                });
+            });
+        });
+    </script>
+{% endif %}

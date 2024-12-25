@@ -9,13 +9,24 @@
         <p>{{ question.text|linebreaks }}</p>
 
         <div class="d-flex align-items-center">
-            <button class="btn btn-outline-success btn-sm">
-                <i class="bi bi-heart"></i> {{ question.likes_count }}
+            <button id="like-button-{{ question.id }}"
+                    class="btn btn-outline-success btn-sm mt-2 mb-2"
+                    data-question-id="{{ question.id }}">
+                <i class="bi bi-heart"></i>
+                <span class="likes-count" id="likes-{{ question.id }}">
+                    {{ likes_count }}
+                </span>
             </button>
         </div>
 
         <div class="mt-3">
-            <span class="badge bg-secondary">{{ question.tag }}</span>
+            Теги:
+            {% for tag in question.tags.all %}
+                <a class="text-decoration-none"
+                   href="{% url 'tag' tag.name %}">
+                    <span class="badge bg-secondary">{{ tag.name }}</span>
+                </a>
+            {% endfor %}
         </div>
     </div>
 
@@ -41,5 +52,38 @@
                 </button>
             </form>
         </div>
+    {% endif %}
+{% endblock %}
+{% block script %}
+    {% if user.is_authenticated %}
+        <script>
+            $(document).ready(function () {
+                $('#like-button-{{ question.id }}').click(function () {
+                    const questionId = $(this).data('question-id');
+                    console.log(questionId)
+                    $.ajax({
+                        url: "{% url 'like_question' %}",
+                        type: 'POST',
+                        data: {
+                            'csrfmiddlewaretoken': '{{ csrf_token }}',
+                            'question_id': questionId,
+                        },
+                        success: function (data) {
+                            $('#likes-{{ question.id }}').text(data.likes_count);
+                            if (data.likes_count !== undefined) {
+                                if ($(this).hasClass('liked')) {
+                                    $(this).removeClass('liked');
+                                } else {
+                                    $(this).addClass('liked');
+                                }
+                            }
+                        },
+                        error: function (data) {
+                            alert(data.responseJSON.error);
+                        }
+                    });
+                });
+            });
+        </script>
     {% endif %}
 {% endblock %}

@@ -19,9 +19,6 @@ class QuestionQuerySet(models.QuerySet):
     def add_likes(self):
         return self.annotate(likes_count=Count('question_likes'))
 
-    def add_answers(self):
-        return self.annotate(answers_count=Count('answers'))
-
 
 class QuestionManager(models.Manager):
     def get_queryset(self):
