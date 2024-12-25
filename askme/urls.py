@@ -1,14 +1,14 @@
-from django.urls import path
-
-from questions import views
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
-    path('', views.index_view, name='index'),
-    path('question/<int:pk>/', views.question_detail_view, name='question'),
-    path('tag/<str:tag_name>/', views.tag_view, name='tag'),
-    path('ask/', views.ask, name='ask'),
-    path('hot/', views.hot_view, name='hot'),
-    path('login/', views.login, name='login'),
-    path('signup/', views.signup, name='signup'),
-    path('settings/', views.settigns, name='settings'),
+    path('admin/', admin.site.urls),
+    path('', include('questions.urls')),
+    path('', include('users.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
